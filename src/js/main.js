@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const books = data.docs.filter(book => book.cover_i && book.language && book.language.includes('eng'));
             let booksDisplayed = 0; // Initialize counter for books displayed
             let booksHTML = ''; // Initialize string to store HTML for all books
-            console.log(books);
             // Iterate over each book
             books.forEach(book => {
                 if (booksDisplayed < maxBooksToShow) {
@@ -162,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             data.docs.forEach(book => {
                 if (booksDisplayed < maxBooksToShow && book.cover_i && book.language && book.language.includes('eng')) {
                     const cardContainer = document.createElement('div');
-                    cardContainer.classList.add('col-md-4');
+                    cardContainer.classList.add('col-lg-4', 'col-md-6', 'col-sm-6', 'col-12');
 
                     const card = document.createElement('div');
                     card.classList.add('card');
@@ -210,3 +209,86 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching books:', error);
     }
 });
+
+
+
+
+
+
+
+const searchForm = document.querySelector('form[role="search"]');
+const suggestionsList = document.getElementById('suggestions');
+let debounceTimer;
+
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
+    const searchInput = document.getElementById('searchInput');
+    const searchQuery = searchInput.value.trim();
+    console.log('Search query:', searchQuery);
+    
+    if (searchQuery.length === 0) {
+        suggestionsList.innerHTML = '';
+        return;
+    }
+
+    // Encode the search query and replace spaces with plus signs
+    const processedSearchQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+');
+    const apiUrl = `https://openlibrary.org/search.json?title=${processedSearchQuery}*&&limit=5`;
+    console.log('API URL:', apiUrl);
+
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        console.log('API Response:', data);
+        console.log('Search Query (toLowerCase):', searchQuery.toLowerCase());
+        console.log('Titles of Suggestions:');
+        data.docs.forEach(suggestion => {
+            console.log(suggestion.title.toLowerCase());
+        });
+        
+        const filteredSuggestions = filterSuggestions(data.docs, searchQuery);
+        console.log('Filtered Suggestions:', filteredSuggestions);
+        displaySuggestions(filteredSuggestions);
+    })
+    .catch(error => {
+        console.error('Error fetching search suggestions:', error);
+    });
+
+});
+
+function filterSuggestions(suggestions, searchQuery) {
+    // Split the search query into individual words
+    const searchWords = searchQuery.toLowerCase().split(' ');
+
+    return suggestions.filter(suggestion => {
+        // Convert the title to lowercase
+        const title = suggestion.title.toLowerCase();
+        
+        // Check if all words from the search query are included in the title
+        return searchWords.every(word => title.includes(word));
+    });
+}
+
+
+
+
+
+function displaySuggestions(suggestions) {
+    console.log('Displaying Suggestions:', suggestions);
+    suggestionsList.innerHTML = '';
+
+    suggestions.forEach(suggestion => {
+        const suggestionLink = document.createElement('a');
+        suggestionLink.classList.add('list-group-item', 'list-group-item-action'); // Add the desired classes
+        suggestionLink.href = `https://openlibrary.org${suggestion.key}`;
+        suggestionLink.textContent = suggestion.title;
+        suggestionsList.appendChild(suggestionLink);
+    });
+}
+
+
+
+
+
+

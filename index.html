@@ -8,34 +8,42 @@
     <title>BookStore</title>
 </head>
 <body>
-
     <section class="main-container container-fluid">
         <article class="row">
             <article class="col">
                 <nav class="nav-container">
                     <img class="logo" src="" alt="Logo">
                     <article class="nav-links">
-                      <a href="#">home</a>
-                      <a href="#">Books</a>
-                      <input type="search">
+                        <a href="#">home</a>
+                        <a href="#">Books</a>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" id="searchInput" placeholder="Search for a book..." aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
                     </article>
-                  </nav>
-            </article>
+                </nav>
 
+                <section class="main-text container-fluid">
+                    <article class="row">
+                        <article class="col-5">
+                            <article class="text-start">
+                                <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At iure eligendi quos impedit? Veniam eius odit distinctio cupiditate vel iste atque, aperiam rem ducimus facere nobis aut doloremque voluptates quam?</p>
+                            </article>        
+                            <button class="button-50" role="button">Explore Books</button>
+                        </article>
+                    </article>
+                </section>
+            </section>
+                    
+        <article id="suggestions" class="suges-container container-fluid list-group">
+            <!-- Suggestions will be displayed here -->
+        </article>
+            </article>
         </article>
 
-    
-        <section class="main-text container-fluid">
-            <article class="row">
-                <article class="col-5">
-                    <article class="text-start">
-                        <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At iure eligendi quos impedit? Veniam eius odit distinctio cupiditate vel iste atque, aperiam rem ducimus facere nobis aut doloremque voluptates quam?</p>
-                    </article>        
-                    <button class="button-50" role="button">Explore Books</button>
-                </article>
-            </article>
-        </section>
     </section>
+    
+
     
 
 
@@ -71,6 +79,8 @@
             <div class="contentt active">
                 <h2>Mystery</h2>
                 <div id="mysteryBooksContainer" class="row">
+                    <article class="row">
+
 
 
                     <div class="d-flex justify-content-center">
@@ -78,7 +88,7 @@
                           <span class="visually-hidden">Loading...</span>
                         </div>
                       </div>
-
+                    </article>
                 </div>
 
             </div>
@@ -86,6 +96,7 @@
             <div class="contentt">
                 <h2>Comedy</h2>
                 <div id="comedyBooksContainer" class="row">
+                    <article class="row">
                     
 
                     <div class="d-flex justify-content-center">
@@ -94,10 +105,10 @@
                         </div>
                       </div>
 
-                    
+                    </article>
                 </div>
+                
             </div>
-            
 
             <div class="contentt">
                 <h2>Horror</h2>
@@ -136,7 +147,6 @@
     <section class="container-fluid">
         <article class="row">
             <article class="col">
-                <h1>sami</h1>
 
             </article>
 
