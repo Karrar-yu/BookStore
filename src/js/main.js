@@ -32,6 +32,16 @@ productContainers.forEach((item, i) => {
     });
 });
 
+
+
+
+
+
+
+
+
+
+
 // When the DOM content is loaded
 document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = "https://openlibrary.org/search.json?author=tolkien&sort=new";
@@ -45,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="visually-hidden">Loading...</span>
   </div>`;
     booksContainer.innerHTML = spinnerHTML;
-
     // Fetch data from the API
     fetch(apiUrl)
         .then(response => {
@@ -106,4 +115,98 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Error fetching data:', error);
             // Display an error message or handle the error as needed
         });
+});
+
+///////////////////////////////////////////////////////////////
+
+const tabs = document.querySelectorAll(".tab-btn")
+const all_content = document.querySelectorAll(".contentt")
+
+tabs.forEach((tab,index) => {
+    tab.addEventListener("click",(e)=>{
+        tabs.forEach(tab=>{tab.classList.remove("active")}); //remove the active to replace it with the class that is pressed
+        tab.classList.add("active");
+
+        var line = document.querySelector('.line');
+        line.style.width = e.target.offsetWidth + "px";
+        line.style.left = e.target.offsetLeft + "px";
+
+        all_content.forEach(content =>content.classList.remove('active'));
+        all_content[index].classList.add('active');
+    })
+
+})
+
+
+
+///////////////////////////////////////////////////////////////
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Function to fetch books based on genre
+        const fetchBooks = async (genre, containerId) => {
+            const response = await fetch(`https://openlibrary.org/search.json?q=books&subject=${genre}&has_cover=true&limit=6`);
+            const data = await response.json();
+            const container = document.getElementById(containerId);
+            const spinner = container.querySelector('.spinner-border'); // Get spinner element inside container
+
+            if (!container) {
+                console.error(`Element with id "${containerId}" not found`);
+                return;
+            }
+
+            const maxBooksToShow = 20;
+            let booksDisplayed = 0;
+            let booksHTML = '';
+
+            data.docs.forEach(book => {
+                if (booksDisplayed < maxBooksToShow && book.cover_i && book.language && book.language.includes('eng')) {
+                    const cardContainer = document.createElement('div');
+                    cardContainer.classList.add('col-md-4');
+
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.classList.add(`${genre.toLowerCase()}Card`); // Dynamic class based on genre
+
+                    const img = document.createElement('img');
+                    img.src = `https://covers.openlibrary.org/a/olid/${book.cover_i}-M.jpg`;
+                    img.alt = book.title;
+                    img.style.width = '100%';
+
+                    const title = document.createElement('h1');
+                    title.textContent = book.title;
+
+                    const description = document.createElement('p');
+                    description.textContent = book.first_publish_year ? `First Published: ${book.first_publish_year}` : 'No publish year available'; // Displaying first publish year if available
+
+                    const button = document.createElement('button');
+                    button.textContent = 'Add to Cart';
+
+                    card.appendChild(img);
+                    card.appendChild(title);
+                    card.appendChild(description);
+                    card.appendChild(button);
+
+                    cardContainer.appendChild(card);
+                    container.appendChild(cardContainer);
+
+                    booksDisplayed++;
+                }
+            });
+
+            // Hide spinner when content is loaded
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        };
+
+        // Fetch books for each genre
+        await fetchBooks('Mystery', 'mysteryBooksContainer');
+        await fetchBooks('Comedy', 'comedyBooksContainer');
+        await fetchBooks('Horror', 'horrorBooksContainer');
+        await fetchBooks('Action', 'actionBooksContainer');
+
+    } catch (error) {
+        console.error('Error fetching books:', error);
+    }
 });
