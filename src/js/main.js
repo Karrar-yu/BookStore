@@ -2,35 +2,25 @@ const productContainers = [...document.querySelectorAll('.product-container')];
 const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
 const preBtn = [...document.querySelectorAll('.pre-btn')];
 
+// Define custom scroll amount
+const scrollAmount = 500; // Adjust this value to control the scroll amount
+
 // Iterate over each product container
 productContainers.forEach((item, i) => {
-    // Get the dimensions of the container
-    let containerDimensions = item.getBoundingClientRect();
-    let containerWidth = containerDimensions.width;
-
-    // Debugging: Log container width
-    console.log("Container Width:", containerWidth);
-
     // Add event listener for the next button
     nxtBtn[i].addEventListener('click', () => {
-        // Debugging: Log next button click
-        console.log("Next Button Clicked");
-        // Scroll the container to the right
-        item.scrollLeft += containerWidth;
-        // Debugging: Log scroll left position
-        console.log("Scroll Left:", item.scrollLeft);
+        // Scroll the container to the right by the specified amount
+        item.scrollLeft += scrollAmount;
     });
 
     // Add event listener for the previous button
     preBtn[i].addEventListener('click', () => {
-        // Debugging: Log previous button click
-        console.log("Previous Button Clicked");
-        // Scroll the container to the left
-        item.scrollLeft -= containerWidth;
-        // Debugging: Log scroll left position
-        console.log("Scroll Left:", item.scrollLeft);
+        // Scroll the container to the left by the specified amount
+        item.scrollLeft -= scrollAmount;
     });
 });
+
+
 
 
 
@@ -139,12 +129,12 @@ tabs.forEach((tab,index) => {
 
 
 ///////////////////////////////////////////////////////////////
-
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Function to fetch books based on genre
         const fetchBooks = async (genre, containerId) => {
-            const response = await fetch(`https://openlibrary.org/search.json?q=books&subject=${genre}&has_cover=true&limit=6`);
+            const screenLimit = window.innerWidth <= 765 ? 6 : 15; // Adjust limit based on screen width
+            const response = await fetch(`https://openlibrary.org/search.json?q=books&subject=${genre}&has_cover=true&limit=${screenLimit}`);
             const data = await response.json();
             const container = document.getElementById(containerId);
             const spinner = container.querySelector('.spinner-border'); // Get spinner element inside container
@@ -161,25 +151,27 @@ document.addEventListener('DOMContentLoaded', async () => {
             data.docs.forEach(book => {
                 if (booksDisplayed < maxBooksToShow && book.cover_i && book.language && book.language.includes('eng')) {
                     const cardContainer = document.createElement('div');
-                    cardContainer.classList.add('col-lg-4', 'col-md-6', 'col-sm-6', 'col-12');
+                    cardContainer.style.width = "16rem"
+                    cardContainer.classList.add("card")
 
                     const card = document.createElement('div');
-                    card.classList.add('card');
                     card.classList.add(`${genre.toLowerCase()}Card`); // Dynamic class based on genre
 
                     const img = document.createElement('img');
-                    img.src = `https://covers.openlibrary.org/a/olid/${book.cover_i}-M.jpg`;
+                    img.src = `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`;
                     img.alt = book.title;
-                    img.style.width = '100%';
+                    img.classList.add("card-img-top");
 
-                    const title = document.createElement('h1');
+                    const title = document.createElement('div');
                     title.textContent = book.title;
+                    title.classList.add("card-title")
 
                     const description = document.createElement('p');
                     description.textContent = book.first_publish_year ? `First Published: ${book.first_publish_year}` : 'No publish year available'; // Displaying first publish year if available
 
                     const button = document.createElement('button');
                     button.textContent = 'Add to Cart';
+                    button.classList.add("btn")
 
                     card.appendChild(img);
                     card.appendChild(title);
@@ -214,10 +206,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-
 const searchForm = document.querySelector('form[role="search"]');
 const suggestionsList = document.getElementById('suggestions');
+const spinner = document.createElement('div');
+spinner.classList.add('spinner-grow', 'text-primary'); // Add classes for styling the spinner
+spinner.setAttribute('role', 'status');
+
 let debounceTimer;
 
 searchForm.addEventListener('submit', (event) => {
@@ -231,6 +225,10 @@ searchForm.addEventListener('submit', (event) => {
         suggestionsList.innerHTML = '';
         return;
     }
+
+    // Show spinner while fetching suggestions
+    suggestionsList.innerHTML = '';
+    suggestionsList.appendChild(spinner);
 
     // Encode the search query and replace spaces with plus signs
     const processedSearchQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+');
@@ -253,6 +251,10 @@ searchForm.addEventListener('submit', (event) => {
     })
     .catch(error => {
         console.error('Error fetching search suggestions:', error);
+    })
+    .finally(() => {
+        // Remove spinner after suggestions are displayed or if there's an error
+        suggestionsList.removeChild(spinner);
     });
 
 });
@@ -270,10 +272,6 @@ function filterSuggestions(suggestions, searchQuery) {
     });
 }
 
-
-
-
-
 function displaySuggestions(suggestions) {
     console.log('Displaying Suggestions:', suggestions);
     suggestionsList.innerHTML = '';
@@ -286,9 +284,3 @@ function displaySuggestions(suggestions) {
         suggestionsList.appendChild(suggestionLink);
     });
 }
-
-
-
-
-
-

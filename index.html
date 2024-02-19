@@ -8,18 +8,25 @@
     <title>BookStore</title>
 </head>
 <body>
-    <section class="main-container container-fluid">
-        <article class="row">
-            <article class="col">
+    <section class="main-container">
                 <nav class="nav-container">
-                    <img class="logo" src="" alt="Logo">
+                    <img class="logo"  src="src/img/logo.png" alt="Logo">
                     <article class="nav-links">
                         <a href="#">home</a>
                         <a href="#">Books</a>
-                        <form class="d-flex" role="search">
+                        <form class="search d-flex" role="search">
+                            <article style="position: fixed; width: 300px; display: flex; align-items: center; background-color: white;" id="suggestions" class=" suges-container  list-group">
+                    
+
+                            </article>
+                            
+
                             <input class="form-control me-2" type="search" id="searchInput" placeholder="Search for a book..." aria-label="Search">
+                                <!-- Suggestions will be displayed here -->
                             <button class="btn btn-outline-success" type="submit">Search</button>
+
                         </form>
+                        
                     </article>
                 </nav>
 
@@ -27,7 +34,7 @@
                     <article class="row">
                         <article class="col-5">
                             <article class="text-start">
-                                <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At iure eligendi quos impedit? Veniam eius odit distinctio cupiditate vel iste atque, aperiam rem ducimus facere nobis aut doloremque voluptates quam?</p>
+                                <p class="">Welcome to our literary Osais, where every page holds a new adventure, a fresh perspective, and a world waiting to be explored. Dive into our curated collection of books, where imagination knows no bounds and stories come to life. Discover your next favorite read and embark on an unforgettable journey with us.</p>
                             </article>        
                             <button class="button-50" role="button">Explore Books</button>
                         </article>
@@ -35,9 +42,7 @@
                 </section>
             </section>
                     
-        <article id="suggestions" class="suges-container container-fluid list-group">
-            <!-- Suggestions will be displayed here -->
-        </article>
+
             </article>
         </article>
 
@@ -53,7 +58,7 @@
     <section class="product container-fluid text-center d-felx justify-content-center align-items-center">
         <article class="row">
             <article class="col">
-                <h2 style= " border-bottom: 2px solid ; padding-bottom:5px;" class="product-category best">best selling books</h2>
+                <h2 style= "color: black; font-style: italic; border-bottom: 2px solid ; padding-bottom:5px;" class="product-category best">best selling books</h2>
 
           
                 <button class="pre-btn"><img class="arrow" src="src/img/arrow.png" alt=""></button>
@@ -62,103 +67,101 @@
 
                 </div>
             </article>
+            <div class="horizontal-line"></div>
+
         </article>
+
     </section>
+
 
     <h2 style="margin-bottom: 20px;" class="text-center">Featured Books</h2>
     
-    <section class="featured-container container-fluid">
+    <section class="featured-container">
         <div class="tab-box">
-            <button class="tab-btn active">Mystery Books</button>
-            <button class="tab-btn">Comedy Books</button>
-            <button class="tab-btn">Horror Books</button>
-            <button class="tab-btn">Action Books</button>
-                <div class="line"></div>
+            <button class="tab-btn active ">Mystery Books</button>
+            <button class="tab-btn ">Comedy Books</button>
+            <button class="tab-btn ">Horror Books</button>
+            <button class="tab-btn ">Action Books</button>
+
         </div>
-        <div class="contect-box container-fluid">
+        <div class="contect-box">
             <div class="contentt active">
-                <h2>Mystery</h2>
+                <div class="box box1">
+                <h2 class="oddboxinner">Mystery</h2>
+                </div>
+
                 <div id="mysteryBooksContainer" class="row">
                     <article class="row">
-
-
-
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                        <div class="d-flex justify-content-center">
+                            <div style="margin: 30px 30px;" class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
-                      </div>
                     </article>
                 </div>
 
             </div>
 
             <div class="contentt">
-                <h2>Comedy</h2>
-                <div id="comedyBooksContainer" class="row">
+                <div class="box box1">
+                    <h2 class="oddboxinner">Comedy</h2>
+                    </div>                
+                    <div id="comedyBooksContainer" class="row">
                     <article class="row">
-                    
-
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
-                      </div>
-
                     </article>
                 </div>
-                
             </div>
 
             <div class="contentt">
-                <h2>Horror</h2>
-                <div id="horrorBooksContainer" class="row">
-
-
-
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                <div class="box box1">
+                    <h2 class="oddboxinner">Horror</h2>
+                    </div>   
+                                    <div id="horrorBooksContainer" class="row">
+                    <article class="row">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
-                      </div>
-
-
-
+                    </article>
                 </div>
             </div>
 
             <div class="contentt">
-                <h2>Action</h2>
-                <div id="actionBooksContainer" class="row">
-                
-
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                <div class="box box1">
+                    <h2 class="oddboxinner">Action</h2>
+                    </div>                  
+                     <div id="actionBooksContainer" class="row">
+                    <article class="row">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
-                      </div>
-
-
+                    </article>
                 </div>
+            </div>
         </div>
     </section>
 
 
-    <section class="container-fluid">
-        <article class="row">
-            <article class="col">
 
-            </article>
-
-        </article>
-
+    <section>
+        
     </section>
+    
+        
     
 
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script type="module" src="src/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
