@@ -234,7 +234,6 @@ async function fetchBooks(category) {
     return data.docs;
 }
 
-// Function to display books
 async function displayBooks() {
     const comedyBooks = await fetchBooks('comedy');
     const horrorBooks = await fetchBooks('horror');
@@ -245,11 +244,9 @@ async function displayBooks() {
     displayBooksInList(actionBooks, 'action-books');
 }
 
-// Function to display books in card layout
 function displayBooksInList(books, containerId) {
     const container = document.getElementById(containerId);
     books.forEach(book => {
-        // Create card elements and append them to the container
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card-dis');
 
@@ -280,13 +277,11 @@ function displayBooksInList(books, containerId) {
         container.appendChild(cardDiv);
     });
 
-    // Hide the .infinity-10 element for the corresponding tab when books are loaded
     const infinityElement = container.querySelector('.infinity-10');
     if (infinityElement) {
         infinityElement.style.display = 'none';
     }
 }
 
-// Call the displayBooks function when the page loads
 window.onload = displayBooks;
 
