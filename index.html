@@ -75,85 +75,34 @@
 
 
     <h2 style="margin-bottom: 20px;" class="text-center">Featured Books</h2>
-    
-    <section class="featured-container">
-        <div class="tab-box">
-            <button class="tab-btn active ">Mystery Books</button>
-            <button class="tab-btn ">Comedy Books</button>
-            <button class="tab-btn ">Horror Books</button>
-            <button class="tab-btn ">Action Books</button>
 
+    <!--   TABs ---------------------------------------------------------------------------------------------------------------------->
+    <!--   TABs ---------------------------------------------------------------------------------------------------------------------->
+    <!--   TABs ---------------------------------------------------------------------------------------------------------------------->
+    <!--   TABs ---------------------------------------------------------------------------------------------------------------------->
+    <!--   TABs ---------------------------------------------------------------------------------------------------------------------->
+
+    <div class="tabs">
+        <div class="tabs-sidebar">
+            <button class="tabs-btn tabs-btn--active" data-for-tab="1">Horror Books</button>
+            <button class="tabs-btn" data-for-tab="2">Action Books</button>
+            <button class="tabs-btn" data-for-tab="3">Comedy Books</button>
         </div>
-        <div class="contect-box">
-            <div class="contentt active">
-                <div class="box box1">
-                <h2 class="oddboxinner">Mystery</h2>
-                </div>
 
-                <div id="mysteryBooksContainer" class="row">
-                    <article class="row">
-                        <div class="d-flex justify-content-center">
-                            <div style="margin: 30px 30px;" class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-            </div>
-
-            <div class="contentt">
-                <div class="box box1">
-                    <h2 class="oddboxinner">Comedy</h2>
-                    </div>                
-                    <div id="comedyBooksContainer" class="row">
-                    <article class="row">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <div class="contentt">
-                <div class="box box1">
-                    <h2 class="oddboxinner">Horror</h2>
-                    </div>   
-                                    <div id="horrorBooksContainer" class="row">
-                    <article class="row">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <div class="contentt">
-                <div class="box box1">
-                    <h2 class="oddboxinner">Action</h2>
-                    </div>                  
-                     <div id="actionBooksContainer" class="row">
-                    <article class="row">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
+        <div class="tabs-content tabs-content--active" data-tab="1">
+            <div id="horror-books" class="card-container"><div class="infinity-10"></div></div>
         </div>
-    </section>
+
+        <div class="tabs-content" data-tab="2"> 
+            <div id="action-books" class="card-container"><div class="infinity-10"></div></div>
+        </div>
+
+        <div class="tabs-content" data-tab="3">
+            <div id="comedy-books" class="card-container"><div class="infinity-10"></div></div>
+        </div>
+    </div>
 
 
-
-    <section>
-        
-    </section>
     
         
     
@@ -161,7 +110,7 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script type="module" src="src/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
