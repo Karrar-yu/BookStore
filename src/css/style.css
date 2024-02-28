@@ -677,6 +677,37 @@ width: 77px;
   transition: transform 0.3s ease-in-out; /* Adding transition for smooth effect */
 }
 
+@media (max-width: 500px) {
+  .card-dis {
+    width: 250px !important;
+    
+  }
+}
+
+@media (max-width: 415px) {
+  .card-dis {
+    width: 200px !important;
+    height:300px !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .tabs-sidebar  {
+    width: 121px;
+    height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .tabs-btn  {
+    width: 70px;
+  }
+}
+
+
+
+
+
 .card-dis a {
   background-color: bisque;
   text-decoration: none;
