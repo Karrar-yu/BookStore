@@ -16,5 +16,5 @@ This project uses the Open Library API to power a dynamic book store website wit
 
 ## Screenshots
 
-![App Screenshot](/src/img/Bookstore.png)
+![App Screenshot](src/img/Bookstore.png)
 
