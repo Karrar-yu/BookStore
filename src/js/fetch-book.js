@@ -1,24 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://openlibrary.org/search.json?author=tolkien&sort=new';
-    const maxBooksToShow = 20; // Set the maximum number of books to display
+    const maxBooksToShow = 20;
   
     const booksContainer = document.querySelector('.product-container');
     const nxtBtn = document.querySelector('.nxt-btn');
     const preBtn = document.querySelector('.pre-btn');
   
-    // Add spinner to indicate loading
     const spinnerHTML = `
       <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
       <span class="visually-hidden">Loading...</span>
       </div>`;
     booksContainer.innerHTML = spinnerHTML;
   
-    let scrollPosition = 0; // Initialize scroll position
+    let scrollPosition = 0;
   
-    // Function to handle scrolling
     const handleScroll = (direction) => {
       const containerWidth = booksContainer.offsetWidth;
-      const scrollIncrement = containerWidth * 0.8; // Adjust this value as needed
+      const scrollIncrement = containerWidth * 0.3; 
   
       if (direction === 'next') {
         scrollPosition += scrollIncrement;
@@ -26,29 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollPosition -= scrollIncrement;
       }
   
-      // Ensure scrollPosition stays within bounds
       scrollPosition = Math.max(0, Math.min(scrollPosition, booksContainer.scrollWidth - containerWidth));
   
-      // Smooth scroll animation
       booksContainer.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
       });
     };
   
-    // Event listener for next button
     nxtBtn.addEventListener('click', () => {
       handleScroll('next');
     });
   
-    // Event listener for previous button
     preBtn.addEventListener('click', () => {
       handleScroll('prev');
     });
   
 ;
   
-    // Fetch data from the API
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -57,17 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();
       })
       .then((data) => {
-        // Filter out books without cover images and limit to English language
         const books = data.docs.filter(
           (book) => book.cover_i && book.language && book.language.includes('eng'),
         );
-        const booksDisplayed = 0; // Initialize counter for books displayed
-        let booksHTML = ''; // Initialize string to store HTML for all books
-        // Iterate over each book
+        const booksDisplayed = 0; 
+        let booksHTML = '';
         books.forEach((book) => {
           if (booksDisplayed < maxBooksToShow) {
             const bookCard = document.createElement('div');
-            bookCard.classList.add('product-card', 'card'); // Added 'card' class
+            bookCard.classList.add('product-card', 'card'); 
   
             bookCard.style.width = '18rem';
   
@@ -96,11 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const bookButton = document.createElement('a');
             bookButton.classList.add('btnn');
             bookButton.href = '#';
-            bookButton.textContent = 'Checkout the book'; // Change the text as needed
+            bookButton.textContent = 'Checkout the book';
   
             bookCardBody.appendChild(bookTitle);
             bookCardBody.appendChild(bookText);
-            bookCardBody.appendChild(bookButton); // Append the button to the card body
+            bookCardBody.appendChild(bookButton); 
             bookCard.appendChild(bookImage);
             bookCard.appendChild(bookCardBody);
   
