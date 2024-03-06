@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
             const bookText = document.createElement('p');
             bookText.classList.add('card-text');
-            bookText.textContent = "Some quick example text to build on the card title and make up the bulk of the card's content.";
+            bookText.textContent = "[Description about the book]";
   
             const bookButton = document.createElement('a');
             bookButton.classList.add('btnn');

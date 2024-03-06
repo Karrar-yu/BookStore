@@ -377,7 +377,8 @@ height: 200px;
   opacity: 0.5;
 }
 
-.card {
+.card { 
+  align-items: center !important;
   margin: 38px 18px;
   position: relative;
   background-color: white;
@@ -387,7 +388,6 @@ height: 200px;
   height: 550px !important;
   display: flex !important;
   justify-content: space-evenly !important;
-  align-items: end !important;
   flex-direction: column !important;
 }
 .card:hover {
