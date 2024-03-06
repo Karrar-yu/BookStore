@@ -59,3 +59,8 @@ const displaySuggestions = (suggestions) => {
     suggestionsList.appendChild(suggestionLink);
   });
 };
+
+// Add event listener to document body to clear suggestions list when clicked
+document.body.addEventListener('click', () => {
+  suggestionsList.innerHTML = '';
+});
